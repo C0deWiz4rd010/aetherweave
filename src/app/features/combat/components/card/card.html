@@ -1,12 +1,17 @@
 <div class="cost">{{ card().cost }}</div>
+<span class="rarity" [style.background]="rarityColor()"></span>
+
 <div class="art">
+  <span class="art-glow"></span>
   <span class="glyph">{{ elementGlyph() || '✦' }}</span>
 </div>
+
 <div class="title">{{ card().name }}</div>
 <div class="type">
   {{ card().type }}@if (card().element) { · {{ card().element }} }
 </div>
 <div class="desc">{{ card().description }}</div>
+
 @if (card().exhaust) {
   <div class="exhaust">Exhaust</div>
 }

@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { TitleCasePipe } from '@angular/common';
 import { CombatService } from '../../core/services/combat.service';
 import { GameStore } from '../../core/services/game-store';
 import { CHARACTERS } from '../../core/data/characters.data';
@@ -19,7 +20,7 @@ import { PlayerPanel } from './components/player-panel/player-panel';
 @Component({
   selector: 'app-combat',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Card, Enemy, PlayerPanel],
+  imports: [Card, Enemy, PlayerPanel, TitleCasePipe],
   templateUrl: './combat.html',
   styleUrl: './combat.scss',
 })
@@ -30,6 +31,9 @@ export class Combat {
 
   protected readonly selectedCard = signal<string | null>(null);
   protected readonly showLog = signal(false);
+  protected readonly screenShake = signal(false);
+  protected readonly reactionBanner = signal<{ id: number; text: string } | null>(null);
+  private lastReactionId = -1;
 
   protected readonly hero = computed(() => CHARACTERS[this.store.characterId()]);
 
@@ -43,6 +47,30 @@ export class Combat {
       if (r === 'win') this.store.setPhase('reward');
       if (r === 'lose') this.store.setPhase('defeat');
     });
+
+    // screen shake + banner when a reaction fires
+    effect(() => {
+      const reactions = this.combat.floaters().filter((f) => f.kind === 'reaction');
+      const newest = reactions[reactions.length - 1];
+      if (newest && newest.id !== this.lastReactionId) {
+        this.lastReactionId = newest.id;
+        this.reactionBanner.set({ id: newest.id, text: newest.text ?? '' });
+        this.screenShake.set(true);
+        setTimeout(() => this.screenShake.set(false), 380);
+        setTimeout(() => {
+          if (this.reactionBanner()?.id === newest.id) this.reactionBanner.set(null);
+        }, 950);
+      }
+    });
+  }
+
+  protected handTransform(i: number): string {
+    const n = this.combat.hand().length;
+    const mid = (n - 1) / 2;
+    const offset = i - mid;
+    const rot = offset * 2.4;
+    const lift = Math.abs(offset) * 4;
+    return `rotate(${rot}deg) translateY(${lift}px)`;
   }
 
   protected floatersFor(target: string): Floater[] {

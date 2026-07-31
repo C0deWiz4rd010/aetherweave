@@ -33,6 +33,19 @@ export class Card {
     return el ? ELEMENTS[el].color : 'var(--accent)';
   });
 
+  protected readonly rarityColor = computed(() => {
+    switch (this.card().rarity) {
+      case 'rare':
+        return '#f2c14e';
+      case 'uncommon':
+        return '#6bffb0';
+      case 'common':
+        return '#8fd3ff';
+      default:
+        return '#a6a8d4';
+    }
+  });
+
   protected readonly elementGlyph = computed(() => {
     const el = this.card().element;
     return el ? ELEMENTS[el].glyph : '';

@@ -36,8 +36,18 @@ export class Enemy {
   protected readonly statuses = STATUSES;
   protected readonly elements = ELEMENTS;
 
+  protected readonly burstAngles = Array.from({ length: 12 }, (_, i) => i * 30);
+
   protected readonly hpPct = computed(
     () => `${Math.max(0, (this.enemy().hp / this.enemy().maxHp) * 100)}%`,
+  );
+
+  protected readonly hitActive = computed(() =>
+    this.floaters().some((f) => f.kind === 'damage'),
+  );
+
+  protected readonly reactionFloaters = computed(() =>
+    this.floaters().filter((f) => f.kind === 'reaction'),
   );
 
   protected readonly statusList = computed(() =>

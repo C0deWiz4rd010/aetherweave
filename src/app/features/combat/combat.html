@@ -1,4 +1,4 @@
-<section class="combat">
+<section class="combat" [class.shaking]="screenShake()">
   <header class="topbar">
     <div class="run-info">
       <span class="tag">Act {{ store.act() }}</span>
@@ -9,16 +9,23 @@
   </header>
 
   <div class="battlefield">
-    @for (e of combat.enemies(); track e.uid) {
-      <app-enemy
-        [enemy]="e"
-        [targetable]="isTargeting()"
-        [selected]="false"
-        [floaters]="floatersFor(e.uid)"
-        (pick)="targetEnemy($event)"
-      />
-    }
+    <div class="arena-floor"></div>
+    <div class="enemies">
+      @for (e of combat.enemies(); track e.uid) {
+        <app-enemy
+          [enemy]="e"
+          [targetable]="isTargeting()"
+          [selected]="false"
+          [floaters]="floatersFor(e.uid)"
+          (pick)="targetEnemy($event)"
+        />
+      }
+    </div>
   </div>
+
+  @if (reactionBanner(); as banner) {
+    <div class="reaction-banner" [attr.data-id]="banner.id">{{ banner.text | titlecase }}!</div>
+  }
 
   @if (showLog()) {
     <aside class="log panel">
@@ -44,13 +51,15 @@
         <span class="pile" title="Discard pile">♻️ {{ combat.discardPile().length }}</span>
       </div>
       <div class="hand">
-        @for (card of combat.hand(); track card.uid) {
-          <app-card
-            [card]="card"
-            [playable]="combat.canPlay(card)"
-            [selected]="selectedCard() === card.uid"
-            (pick)="pickCard($event)"
-          />
+        @for (card of combat.hand(); track card.uid; let i = $index) {
+          <div class="hand-slot" [style.transform]="handTransform(i)">
+            <app-card
+              [card]="card"
+              [playable]="combat.canPlay(card)"
+              [selected]="selectedCard() === card.uid"
+              (pick)="pickCard($event)"
+            />
+          </div>
         }
       </div>
     </div>

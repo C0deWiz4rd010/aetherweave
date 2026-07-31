@@ -4,18 +4,33 @@
 </div>
 
 <div class="sprite-wrap">
+  <div class="platform"></div>
+
   @if (aura(); as a) {
-    <span class="aura" [style.color]="a.color" [title]="a.name + ' aura'">{{ a.glyph }}</span>
+    <span class="aura-ring" [style.--aura]="a.color"></span>
+    <span class="aura-badge" [style.color]="a.color" [title]="a.name + ' aura'">{{ a.glyph }}</span>
   }
-  <div class="sprite">{{ enemy().glyph }}</div>
-  @if (enemy().block > 0) {
-    <span class="block-badge">🛡️ {{ enemy().block }}</span>
+
+  <div class="sprite" [class.hit]="hitActive()">
+    <span class="glyph">{{ enemy().glyph }}</span>
+    @if (enemy().block > 0) {
+      <span class="block-badge">🛡️ {{ enemy().block }}</span>
+    }
+  </div>
+
+  @for (r of reactionFloaters(); track r.id) {
+    <span class="reaction-word">{{ r.text | titlecase }}!</span>
+    <span class="burst">
+      @for (ang of burstAngles; track ang) {
+        <i class="spark" [style.--ang.deg]="ang"></i>
+      }
+    </span>
   }
 
   @for (f of floaters(); track f.id) {
-    <span class="floater" [class]="'floater-' + f.kind">
-      @if (f.kind === 'reaction') { {{ f.text | titlecase }}! } @else { -{{ f.amount }} }
-    </span>
+    @if (f.kind === 'damage') {
+      <span class="floater floater-damage">-{{ f.amount }}</span>
+    }
   }
 </div>
 

@@ -59,6 +59,12 @@
   mask-image: radial-gradient(circle at 50% 40%, #000 30%, transparent 80%);
 }
 
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 42%, transparent 55%, rgba(3, 3, 10, 0.7) 100%);
+}
+
 @keyframes drift {
   0%,
   100% {
