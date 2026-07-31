@@ -15,10 +15,12 @@
 }
 
 .brand .sigil {
+  display: inline-block;
   font-size: 3rem;
   color: var(--accent);
   text-shadow: 0 0 30px var(--accent);
   animation: pulse-glow 3s ease-in-out infinite;
+  border-radius: 50%;
 }
 
 .brand h1 {
