@@ -1,0 +1,18 @@
+<section class="rest">
+  <div class="fire">🔥</div>
+  <h1>A Moment's Respite</h1>
+  <p class="sub">The campfire's glow holds the Spire's chill at bay. ❤️ {{ store.hp() }} / {{ store.maxHp() }}</p>
+
+  <div class="options">
+    <button class="option panel" (click)="rest()">
+      <div class="opt-glyph">💤</div>
+      <div class="opt-name">Rest</div>
+      <p>Heal 30% of your maximum HP.</p>
+    </button>
+    <button class="option panel" (click)="attune()">
+      <div class="opt-glyph">✨</div>
+      <div class="opt-name">Attune</div>
+      <p>Raise your maximum HP by 8.</p>
+    </button>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+<section class="combat">
+  <header class="topbar">
+    <div class="run-info">
+      <span class="tag">Act {{ store.act() }}</span>
+      <span class="tag">Turn {{ combat.turn() }}</span>
+      <span class="tag gold">💰 {{ store.gold() }}</span>
+    </div>
+    <button class="btn btn-ghost small" (click)="showLog.set(!showLog())">Log</button>
+  </header>
+
+  <div class="battlefield">
+    @for (e of combat.enemies(); track e.uid) {
+      <app-enemy
+        [enemy]="e"
+        [targetable]="isTargeting()"
+        [selected]="false"
+        [floaters]="floatersFor(e.uid)"
+        (pick)="targetEnemy($event)"
+      />
+    }
+  </div>
+
+  @if (showLog()) {
+    <aside class="log panel">
+      @for (entry of combat.log(); track $index) {
+        <div class="log-line" [class]="'log-' + entry.kind">{{ entry.text }}</div>
+      }
+    </aside>
+  }
+
+  <div class="player-zone">
+    <app-player-panel
+      class="panel player-card"
+      [player]="combat.player()"
+      [relicIds]="store.relics()"
+      [heroGlyph]="hero()?.glyph ?? '✦'"
+      [heroName]="(hero()?.name ?? 'Weaver')"
+      [floaters]="floatersFor('player')"
+    />
+
+    <div class="hand-zone">
+      <div class="piles">
+        <span class="pile" title="Draw pile">🂠 {{ combat.drawPile().length }}</span>
+        <span class="pile" title="Discard pile">♻️ {{ combat.discardPile().length }}</span>
+      </div>
+      <div class="hand">
+        @for (card of combat.hand(); track card.uid) {
+          <app-card
+            [card]="card"
+            [playable]="combat.canPlay(card)"
+            [selected]="selectedCard() === card.uid"
+            (pick)="pickCard($event)"
+          />
+        }
+      </div>
+    </div>
+
+    <button class="btn btn-primary end-turn" [disabled]="combat.busy() || !!combat.result()" (click)="endTurn()">
+      End Turn
+    </button>
+  </div>
+
+  @if (isTargeting()) {
+    <div class="targeting-hint">Choose a target</div>
+  }
+
+  @if (combat.result() === 'win') {
+    <div class="overlay">
+      <div class="result-card panel">
+        <h1 class="victory">Victory</h1>
+        <p>The Aether stills. You claim {{ combat.goldReward() }} gold and your spoils.</p>
+        <button class="btn btn-primary" (click)="toReward()">Claim Rewards</button>
+      </div>
+    </div>
+  }
+  @if (combat.result() === 'lose') {
+    <div class="overlay">
+      <div class="result-card panel">
+        <h1 class="defeat">Defeated</h1>
+        <p>The Spire claims another weaver. Your run ends here.</p>
+        <button class="btn" (click)="toDefeat()">Continue</button>
+      </div>
+    </div>
+  }
+</section>

@@ -1,0 +1,63 @@
+:host {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 2rem 1rem;
+}
+.result {
+  --tone: var(--danger);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  animation: rise 0.6s ease both;
+}
+.result.win {
+  --tone: var(--gold);
+}
+.emblem {
+  font-size: 4.5rem;
+  filter: drop-shadow(0 0 26px var(--tone));
+  animation: pulse-glow 2.6s ease-in-out infinite;
+}
+.result h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0.12em;
+  color: var(--tone);
+  text-shadow: 0 0 24px var(--tone);
+}
+.flavor {
+  max-width: 480px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.summary {
+  display: flex;
+  gap: 1.6rem;
+  padding: 1rem 1.6rem;
+}
+.summary div {
+  display: flex;
+  flex-direction: column;
+}
+.summary dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.summary dd {
+  margin: 0.2rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}

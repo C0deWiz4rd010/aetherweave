@@ -1,0 +1,129 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.hero {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.avatar {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #2a2660, #0c0b1e);
+  border: 1px solid var(--accent);
+  box-shadow: var(--glow);
+}
+.block-badge {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  background: rgba(10, 20, 40, 0.9);
+  color: var(--accent-2);
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-2);
+  white-space: nowrap;
+}
+.floater {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  font-weight: 800;
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: float-up 0.9s ease-out forwards;
+  text-shadow: 0 2px 6px #000;
+}
+.floater-damage {
+  color: #ff5d73;
+}
+.floater-heal {
+  color: #6bffb0;
+}
+.floater-block {
+  color: #6be1ff;
+}
+
+.vitals {
+  flex: 1;
+  min-width: 200px;
+}
+.name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.hp-bar {
+  position: relative;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+}
+.hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6bffb0, #6be1ff);
+  transition: width 0.3s ease;
+}
+.hp-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px #000;
+}
+
+.energy {
+  display: flex;
+  gap: 0.2rem;
+  margin-top: 0.35rem;
+}
+.pip {
+  font-size: 1.1rem;
+  color: rgba(120, 120, 170, 0.4);
+  transition: color 0.2s ease;
+}
+.pip.on {
+  color: var(--accent-2);
+  text-shadow: 0 0 10px var(--accent-2);
+}
+
+.statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+.status {
+  font-size: 0.85rem;
+}
+.status b {
+  font-size: 0.72rem;
+}
+
+.relics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.relic {
+  font-size: 1.15rem;
+  cursor: help;
+  filter: drop-shadow(0 0 5px currentColor);
+}

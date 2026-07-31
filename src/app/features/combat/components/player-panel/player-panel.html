@@ -1,0 +1,49 @@
+<div class="hero">
+  <div class="avatar">
+    {{ heroGlyph() }}
+    @if (player().block > 0) {
+      <span class="block-badge">🛡️ {{ player().block }}</span>
+    }
+    @for (f of floaters(); track f.id) {
+      <span class="floater" [class]="'floater-' + f.kind">
+        @if (f.kind === 'heal') { +{{ f.amount }} }
+        @else if (f.kind === 'block') { 🛡️{{ f.amount }} }
+        @else if (f.kind === 'damage') { -{{ f.amount }} }
+      </span>
+    }
+  </div>
+
+  <div class="vitals">
+    <div class="name">{{ heroName() }}</div>
+    <div class="hp-bar">
+      <div class="hp-fill" [style.width]="hpPct()"></div>
+      <span class="hp-text">{{ player().hp }} / {{ player().maxHp }}</span>
+    </div>
+
+    <div class="energy" [title]="player().energy + ' energy'">
+      @for (on of energyPips(); track $index) {
+        <span class="pip" [class.on]="on">✦</span>
+      }
+    </div>
+
+    @if (statusList().length) {
+      <div class="statuses">
+        @for (s of statusList(); track s.info.id) {
+          <span class="status" [style.color]="s.info.color" [title]="s.info.name + ': ' + s.info.description">
+            {{ s.info.glyph }}<b>{{ s.amount }}</b>
+          </span>
+        }
+      </div>
+    }
+  </div>
+</div>
+
+@if (relicIds().length) {
+  <div class="relics">
+    @for (id of relicIds(); track id) {
+      <span class="relic" [style.color]="relics[id].color" [title]="relics[id].name + ': ' + relics[id].description">
+        {{ relics[id].glyph }}
+      </span>
+    }
+  </div>
+}

@@ -1,0 +1,77 @@
+:host {
+  --event-color: var(--accent);
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+.event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 560px;
+  text-align: center;
+  animation: rise 0.5s ease both;
+}
+.glyph {
+  font-size: 3.4rem;
+  filter: drop-shadow(0 0 16px var(--event-color));
+}
+.event h1 {
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  color: var(--event-color);
+}
+.story {
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.outcome {
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+}
+.choice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 0.14s ease,
+    border-color 0.2s ease;
+}
+.choice:hover:not(:disabled) {
+  transform: translateX(6px);
+  border-color: var(--event-color);
+}
+.choice:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.choice-label {
+  font-weight: 700;
+  color: var(--event-color);
+}
+.choice-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

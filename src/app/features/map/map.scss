@@ -1,0 +1,107 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  padding: 1rem;
+}
+
+.hud {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.hud .gold {
+  color: var(--gold);
+}
+
+.title {
+  text-align: center;
+  margin: 0.6rem 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+}
+
+.map-area {
+  position: relative;
+  flex: 1;
+  width: min(680px, 96vw);
+  margin: 0 auto;
+}
+
+.edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.edges line {
+  stroke: rgba(120, 120, 170, 0.28);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 2;
+}
+.edges line.active {
+  stroke: var(--accent);
+  stroke-width: 0.8;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 2px var(--accent));
+}
+
+.node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  background: radial-gradient(circle at 50% 35%, #201d47, #0c0b1e);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  cursor: default;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+.node.visited {
+  opacity: 0.4;
+  filter: grayscale(0.6);
+}
+.node.current {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 14px var(--accent-2);
+  opacity: 1;
+}
+.node.available {
+  cursor: pointer;
+  border-color: var(--accent);
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
+.node.available:hover {
+  transform: translate(-50%, -50%) scale(1.18);
+}
+
+.type-elite {
+  color: var(--danger);
+}
+.type-boss {
+  width: 58px;
+  height: 58px;
+  font-size: 1.7rem;
+  border-color: var(--danger);
+}
+.type-treasure {
+  color: var(--gold);
+}
+.type-rest {
+  color: var(--good);
+}
+
+.hint {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}

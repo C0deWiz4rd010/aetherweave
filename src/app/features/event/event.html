@@ -1,0 +1,23 @@
+<section class="event" [style.--event-color]="event?.color ?? 'var(--accent)'">
+  @if (event; as ev) {
+    <div class="glyph">{{ ev.glyph }}</div>
+    <h1>{{ ev.title }}</h1>
+    <p class="story">{{ ev.text }}</p>
+
+    @if (resolved(); as text) {
+      <p class="outcome">{{ text }}</p>
+      <button class="btn btn-primary" (click)="continue()">Continue</button>
+    } @else {
+      <div class="choices">
+        @for (c of ev.choices; track c.label) {
+          <button class="choice panel" [disabled]="!affordable(c)" (click)="pick(c)">
+            <span class="choice-label">{{ c.label }}</span>
+            <span class="choice-desc">{{ c.description }}</span>
+          </button>
+        }
+      </div>
+    }
+  } @else {
+    <button class="btn btn-primary" (click)="continue()">Continue</button>
+  }
+</section>

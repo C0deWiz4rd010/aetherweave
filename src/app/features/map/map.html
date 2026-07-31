@@ -1,0 +1,43 @@
+<section class="map-screen">
+  <header class="hud">
+    <span class="tag">Act {{ store.act() }}</span>
+    <span class="tag">❤️ {{ store.hp() }} / {{ store.maxHp() }}</span>
+    <span class="tag gold">💰 {{ store.gold() }}</span>
+    <span class="tag">🃏 {{ store.deck().length }}</span>
+  </header>
+
+  <h1 class="title">The Spire — Act {{ store.act() }}</h1>
+
+  <div class="map-area">
+    <svg class="edges" viewBox="0 0 100 100" preserveAspectRatio="none">
+      @for (e of edges(); track $index) {
+        <line
+          [attr.x1]="e.x1"
+          [attr.y1]="e.y1"
+          [attr.x2]="e.x2"
+          [attr.y2]="e.y2"
+          [class.active]="e.active"
+        />
+      }
+    </svg>
+
+    @for (n of nodes(); track n.id) {
+      <button
+        class="node"
+        [class.available]="isAvailable(n.id)"
+        [class.visited]="isVisited(n.id)"
+        [class.current]="isCurrent(n.id)"
+        [class]="'type-' + n.type"
+        [style.left]="posLeft(n)"
+        [style.top]="posTop(n)"
+        [disabled]="!isAvailable(n.id)"
+        [title]="label[n.type]"
+        (click)="choose(n.id)"
+      >
+        <span class="node-icon">{{ icon[n.type] }}</span>
+      </button>
+    }
+  </div>
+
+  <p class="hint">Choose your path upward. The boss awaits at the summit.</p>
+</section>

@@ -1,0 +1,19 @@
+<section class="reward">
+  <h1>Spoils of Battle</h1>
+  <div class="gold-line">💰 You gained {{ gold() }} gold</div>
+
+  <h2>Choose a card to add</h2>
+  <div class="options">
+    @for (card of options(); track card.id) {
+      <button class="opt panel" [style.--accent-card]="accent(card)" (click)="take(card)">
+        <div class="cost">{{ card.cost }}</div>
+        <div class="glyph">{{ card.element ? elements[card.element].glyph : '✦' }}</div>
+        <div class="name">{{ card.name }}</div>
+        <div class="type">{{ card.type }}@if (card.element) { · {{ card.element }} }</div>
+        <p class="desc">{{ card.description }}</p>
+      </button>
+    }
+  </div>
+
+  <button class="btn btn-ghost" (click)="continue()">Skip</button>
+</section>

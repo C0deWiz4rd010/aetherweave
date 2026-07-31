@@ -1,0 +1,139 @@
+:host {
+  display: grid;
+  place-items: start center;
+  height: 100%;
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+}
+.shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: min(900px, 96vw);
+  animation: rise 0.5s ease both;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+header h1 {
+  font-size: 1.7rem;
+  letter-spacing: 0.1em;
+}
+.gold {
+  color: var(--gold);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.wares {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ware {
+  --accent-card: var(--accent);
+  position: relative;
+  width: 160px;
+  padding: 1rem 0.8rem 2.2rem;
+  color: var(--text);
+  cursor: pointer;
+  border-color: color-mix(in srgb, var(--accent-card) 45%, transparent);
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.2s ease;
+}
+.ware:hover:not(:disabled) {
+  transform: translateY(-6px);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent-card) 55%, transparent);
+}
+.ware:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ware.sold {
+  filter: grayscale(0.8);
+}
+.cost {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, var(--accent-card));
+  color: #16112b;
+  font-weight: 700;
+}
+.glyph {
+  font-size: 2.2rem;
+  text-align: center;
+  filter: drop-shadow(0 0 8px var(--accent-card));
+}
+.name {
+  font-family: var(--font-display);
+  text-align: center;
+  margin-top: 0.3rem;
+}
+.desc {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.25;
+  min-height: 48px;
+}
+.price {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.service .btn.active {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+.deck-remove {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+.deck-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+.deck-card {
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  cursor: pointer;
+}
+.deck-card:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.leave {
+  margin-top: 0.5rem;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

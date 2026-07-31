@@ -1,0 +1,171 @@
+:host {
+  --enemy-color: #ff6b3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 170px;
+  padding: 0.4rem;
+  border-radius: 12px;
+  transition:
+    transform 0.15s ease,
+    filter 0.3s ease;
+}
+:host(.targetable) {
+  cursor: crosshair;
+}
+:host(.targetable):hover {
+  transform: translateY(-4px);
+}
+:host(.targetable):hover .sprite {
+  box-shadow:
+    0 0 0 3px var(--enemy-color),
+    0 0 26px var(--enemy-color);
+}
+:host(.selected) .sprite {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 26px var(--enemy-color);
+}
+:host(.dead) {
+  filter: grayscale(1) brightness(0.5);
+  opacity: 0.35;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.intent {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 22px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--panel-border);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+.intent.hidden {
+  visibility: hidden;
+}
+.intent-icon {
+  font-size: 0.95rem;
+}
+
+.sprite-wrap {
+  position: relative;
+}
+.sprite {
+  width: 92px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 35%,
+    color-mix(in srgb, var(--enemy-color) 35%, #14142e),
+    #0c0b1e
+  );
+  border: 1px solid color-mix(in srgb, var(--enemy-color) 60%, transparent);
+  animation: bob 3.4s ease-in-out infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.aura {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 6px currentColor);
+  animation: pulse-glow 2s ease-in-out infinite;
+  z-index: 2;
+}
+.block-badge {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  background: rgba(10, 20, 40, 0.9);
+  color: var(--accent-2);
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-2);
+  white-space: nowrap;
+}
+
+.floater {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  font-weight: 800;
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: float-up 0.9s ease-out forwards;
+  text-shadow: 0 2px 6px #000;
+}
+.floater-damage {
+  color: #ff5d73;
+}
+.floater-reaction {
+  color: #ffd6f5;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.name {
+  font-size: 0.82rem;
+  text-align: center;
+  line-height: 1;
+  color: var(--text-dim);
+}
+.name.elite {
+  color: var(--accent);
+}
+.name.boss {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.hp-bar {
+  position: relative;
+  width: 100%;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+}
+.hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff5d73, #ff8f6b);
+  transition: width 0.3s ease;
+}
+.hp-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px #000;
+}
+
+.statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+}
+.status {
+  font-size: 0.78rem;
+}
+.status b {
+  font-size: 0.7rem;
+}

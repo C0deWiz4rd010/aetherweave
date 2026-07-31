@@ -14,6 +14,9 @@ export interface EventChoice {
   description: string;
   outcome: EventOutcome;
   amount?: number;
+  /** Optional price paid before the outcome resolves. */
+  costType?: 'hp' | 'gold';
+  costAmount?: number;
   cardId?: string;
   relicId?: string;
   resultText: string;

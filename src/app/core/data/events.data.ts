@@ -14,7 +14,8 @@ export const EVENTS: EventDef[] = [
         description: 'Lose 6 HP, gain the Molten Core relic.',
         outcome: 'gainRelic',
         relicId: 'moltenCore',
-        amount: 6,
+        costType: 'hp',
+        costAmount: 6,
         resultText: 'The flame brands you. Your reactions now burn hotter.',
       },
       {
@@ -41,17 +42,20 @@ export const EVENTS: EventDef[] = [
     choices: [
       {
         label: 'Trade coin for vigor',
-        description: 'Lose 20 gold, raise max HP by 10.',
+        description: 'Pay 20 gold, raise max HP by 10.',
         outcome: 'maxHpUp',
         amount: 10,
+        costType: 'gold',
+        costAmount: 20,
         resultText: 'Warmth spreads through your limbs.',
       },
       {
         label: 'Buy a relic',
-        description: 'Lose 45 gold, gain the Runic Tome.',
+        description: 'Pay 45 gold, gain the Runic Tome.',
         outcome: 'gainRelic',
         relicId: 'runicTome',
-        amount: 45,
+        costType: 'gold',
+        costAmount: 45,
         resultText: 'The tome hums with arcane script.',
       },
       {
@@ -71,17 +75,19 @@ export const EVENTS: EventDef[] = [
     choices: [
       {
         label: 'Reach in',
-        description: 'Gain 40 gold, but take 8 damage.',
+        description: 'Take 8 damage, gain 40 gold.',
         outcome: 'gold',
         amount: 40,
+        costType: 'hp',
+        costAmount: 8,
         resultText: 'Frost bites your arm as you pull free a fistful of coin.',
       },
       {
         label: 'Drink deep',
-        description: 'Heal to full, but lose 6 max HP.',
-        outcome: 'maxHpDown',
-        amount: 6,
-        resultText: 'You are restored, though something is left behind in the ice.',
+        description: 'Heal to full.',
+        outcome: 'heal',
+        amount: 999,
+        resultText: 'The frozen water mends every wound.',
       },
       {
         label: 'Turn away',

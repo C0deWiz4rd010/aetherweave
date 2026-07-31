@@ -1,0 +1,19 @@
+<section class="result" [class.win]="victory()">
+  <div class="emblem">{{ victory() ? '👑' : '💀' }}</div>
+  <h1>{{ victory() ? 'The Spire is Yours' : 'Fallen in the Spire' }}</h1>
+  <p class="flavor">
+    @if (victory()) {
+      You wove the elements into a storm none could withstand. The Aether Tyrant falls.
+    } @else {
+      Your thread is cut, but the weave remembers. Rise again, weaver.
+    }
+  </p>
+
+  <dl class="summary panel">
+    <div><dt>Score</dt><dd>{{ store.score() }}</dd></div>
+    <div><dt>Reached</dt><dd>Act {{ store.act() }}</dd></div>
+    <div><dt>Deck Size</dt><dd>{{ store.deck().length }}</dd></div>
+  </dl>
+
+  <button class="btn btn-primary" (click)="toMenu()">Return to Menu</button>
+</section>

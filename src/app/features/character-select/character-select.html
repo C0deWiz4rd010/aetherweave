@@ -1,0 +1,36 @@
+<section class="select">
+  <h1>Choose your Weaver</h1>
+
+  <div class="roster">
+    @for (c of characters; track c.id) {
+      <button
+        class="hero-card panel"
+        [class.active]="selected() === c.id"
+        [style.--hero]="c.color"
+        (click)="select(c.id)"
+      >
+        <div class="glyph">{{ c.glyph }}</div>
+        <div class="hero-name">{{ c.name }}</div>
+        <div class="hero-title">{{ c.title }}</div>
+        <div class="hero-hp">❤️ {{ c.startingHp }} HP</div>
+        <p class="hero-desc">{{ c.description }}</p>
+
+        <div class="starter">
+          <div class="relic" [title]="relics[c.startingRelicId].description">
+            {{ relics[c.startingRelicId].glyph }} {{ relics[c.startingRelicId].name }}
+          </div>
+          <div class="deck">
+            @for (d of deckPreview(c.id); track d.name) {
+              <span class="deck-card">{{ d.count }}× {{ d.name }}</span>
+            }
+          </div>
+        </div>
+      </button>
+    }
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-ghost" (click)="back()">Back</button>
+    <button class="btn btn-primary" (click)="embark()">Embark</button>
+  </div>
+</section>

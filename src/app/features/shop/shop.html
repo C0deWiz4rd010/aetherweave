@@ -1,0 +1,58 @@
+<section class="shop">
+  <header>
+    <h1>🛒 The Weaver's Bazaar</h1>
+    <span class="gold">💰 {{ store.gold() }}</span>
+  </header>
+
+  <div class="wares">
+    @for (item of cards(); track item.card.id) {
+      <button
+        class="ware panel"
+        [class.sold]="item.sold"
+        [style.--accent-card]="accent(item.card)"
+        [disabled]="item.sold || store.gold() < item.price"
+        (click)="buyCard(item)"
+      >
+        <div class="cost">{{ item.card.cost }}</div>
+        <div class="glyph">{{ item.card.element ? elements[item.card.element].glyph : '✦' }}</div>
+        <div class="name">{{ item.card.name }}</div>
+        <p class="desc">{{ item.card.description }}</p>
+        <div class="price">{{ item.sold ? 'SOLD' : (item.price + ' g') }}</div>
+      </button>
+    }
+
+    @if (relicId(); as rid) {
+      <button
+        class="ware relic panel"
+        [class.sold]="relicSold()"
+        [style.--accent-card]="relics[rid].color"
+        [disabled]="relicSold() || store.gold() < relicPrice"
+        (click)="buyRelic()"
+      >
+        <div class="glyph">{{ relics[rid].glyph }}</div>
+        <div class="name">{{ relics[rid].name }}</div>
+        <p class="desc">{{ relics[rid].description }}</p>
+        <div class="price">{{ relicSold() ? 'SOLD' : (relicPrice + ' g') }}</div>
+      </button>
+    }
+  </div>
+
+  <div class="service">
+    <button class="btn" [class.active]="removing()" [disabled]="store.gold() < removeCost" (click)="removing.set(!removing())">
+      Remove a card ({{ removeCost }} g)
+    </button>
+  </div>
+
+  @if (removing()) {
+    <div class="deck-remove panel">
+      <p>Choose a card to remove:</p>
+      <div class="deck-list">
+        @for (c of store.deck(); track c.uid) {
+          <button class="deck-card" (click)="removeCard(c)">{{ c.name }}</button>
+        }
+      </div>
+    </div>
+  }
+
+  <button class="btn btn-primary leave" (click)="leave()">Leave Shop</button>
+</section>

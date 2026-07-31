@@ -48,6 +48,9 @@ export class GameStore {
   readonly floor = signal<number>(0);
   readonly score = signal<number>(0);
 
+  /** Enemy ids for the encounter the combat screen should start. */
+  readonly encounter = signal<string[]>([]);
+
   readonly isRunActive = computed(() => this.seed() !== 0);
   readonly hasRelic = (id: string) => this.relics().includes(id);
 
