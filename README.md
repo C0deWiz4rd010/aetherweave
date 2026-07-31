@@ -1,59 +1,57 @@
-# Aetherweave
+# ✦ Aetherweave
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.2.
+A roguelike **deckbuilder** built with Angular, whose signature mechanic is a deep
+**elemental reaction engine**. Imbue foes with elements, then chain a second element
+to trigger reactions — Vaporize, Overload, Superconduct, Crystallize, Swirl and more —
+cascading through a whole battlefield of enemies.
 
-## Development server
+**Play it:** https://c0dewiz4rd010.github.io/aetherweave/
 
-To start a local development server, run:
+![Angular](https://img.shields.io/badge/Angular-22-dd0031) ![Deploy](https://github.com/C0deWiz4rd010/aetherweave/actions/workflows/deploy.yml/badge.svg)
 
-```bash
-ng serve
-```
+## Gameplay
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Elemental reactions** are the core: every element applied onto an existing aura
+  produces a distinct effect. Pyro + Hydro = Vaporize (double damage); Pyro + Electro
+  = Overload (splash all foes); Cryo + Electro = Superconduct (make foes vulnerable);
+  Geo = Crystallize (block for you); Anemo = Swirl (spread the aura), and more.
+- **Deckbuilding** — win battles for gold and new cards; prune your deck in shops.
+- **Relics** rewrite the rules (reactions deal bonus damage, gain block on reactions…).
+- **Procedural map** — a branching path of battles, elites, events, shops, rests,
+  treasures and a boss per act, across three acts.
+- **Two weavers** to choose from, each with a distinct elemental identity.
+- **Meta progression** persists between runs in `localStorage`.
 
-## Code scaffolding
+## Tech
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular 22, standalone components, **signals** for all state.
+- Deterministic seeded RNG; pure, unit-tested reaction engine.
+- Static SPA deployed to GitHub Pages via GitHub Actions.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Develop
 
 ```bash
-ng test
+npm install
+npm start          # dev server at http://localhost:4200
+npm test           # unit tests (Vitest)
+npm run build      # production build
 ```
 
-## Running end-to-end tests
+## Project structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+src/app/
+  core/
+    models/     domain types
+    services/   RNG, save, reaction engine, combat engine, map, run, game store
+    data/       cards, enemies, relics, characters, events, elements, statuses
+  features/     menu, character-select, map, combat, reward, shop, rest, event, result
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+See [docs/PLAN.md](docs/PLAN.md) for the full design and implementation plan.
 
-## Additional Resources
+## Deployment
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Pushes to `main` trigger the [deploy workflow](.github/workflows/deploy.yml): it runs
+tests, builds with `--base-href /aetherweave/`, adds a `404.html` SPA fallback and
+`.nojekyll`, then publishes to GitHub Pages.
