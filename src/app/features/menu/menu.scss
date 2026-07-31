@@ -1,0 +1,110 @@
+:host {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+  animation: rise 0.6s ease both;
+}
+
+.brand .sigil {
+  font-size: 3rem;
+  color: var(--accent);
+  text-shadow: 0 0 30px var(--accent);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.brand h1 {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  letter-spacing: 0.28em;
+  margin: 0.4rem 0 0;
+  background: linear-gradient(120deg, #fff, var(--accent-2), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline {
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  margin: 0.4rem 0 0;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.actions .btn {
+  min-width: 160px;
+}
+
+.stats {
+  display: flex;
+  gap: 1.6rem;
+  padding: 1rem 1.6rem;
+}
+.stats div {
+  display: flex;
+  flex-direction: column;
+}
+.stats dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.stats dd {
+  margin: 0.2rem 0 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 4, 12, 0.7);
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  animation: fade 0.2s ease both;
+}
+.help {
+  max-width: 560px;
+  padding: 1.8rem 2rem;
+  text-align: left;
+}
+.help h2 {
+  margin-bottom: 0.8rem;
+  color: var(--accent-2);
+}
+.help ul {
+  margin: 0 0 1.4rem;
+  padding-left: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+.help strong {
+  color: var(--text);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

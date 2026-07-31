@@ -1,0 +1,33 @@
+<section class="menu">
+  <header class="brand">
+    <div class="sigil">✦</div>
+    <h1>AETHERWEAVE</h1>
+    <p class="tagline">Weave the elements. Chain the reactions. Ascend the Spire.</p>
+  </header>
+
+  <nav class="actions">
+    <button class="btn btn-primary" (click)="newRun()">New Run</button>
+    <button class="btn" (click)="toggleHelp()">How to Play</button>
+  </nav>
+
+  <dl class="stats panel">
+    <div><dt>Runs Won</dt><dd>{{ store.meta().runsWon }}</dd></div>
+    <div><dt>Runs Played</dt><dd>{{ store.meta().runsPlayed }}</dd></div>
+    <div><dt>Best Score</dt><dd>{{ store.meta().bestScore }}</dd></div>
+  </dl>
+
+  @if (showHelp()) {
+    <div class="overlay" (click)="toggleHelp()">
+      <div class="help panel" (click)="$event.stopPropagation()">
+        <h2>How to Play</h2>
+        <ul>
+          <li>Play cards using <strong>energy</strong> to attack, defend and imbue foes with <strong>elements</strong>.</li>
+          <li>Apply a second element to a foe to trigger a <strong>reaction</strong>: Vaporize & Melt double damage, Overload & Electro-Charged splash all enemies, Frozen skips their turn, Superconduct makes them vulnerable, Crystallize shields you, Swirl spreads auras.</li>
+          <li>Enemies telegraph their <strong>intent</strong> — plan your reactions before ending the turn.</li>
+          <li>Win battles to earn cards, gold and relics. Clear three acts to escape the Spire.</li>
+        </ul>
+        <button class="btn btn-primary" (click)="toggleHelp()">Got it</button>
+      </div>
+    </div>
+  }
+</section>

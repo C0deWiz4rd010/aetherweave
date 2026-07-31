@@ -1,1 +1,191 @@
-/* You can add global styles to this file, and also import other style files */
+/* Aetherweave — global theme & design tokens */
+
+:root {
+  /* Surfaces */
+  --bg-0: #070712;
+  --bg-1: #0d0d20;
+  --bg-2: #14142e;
+  --bg-3: #1d1d42;
+  --panel: rgba(28, 28, 62, 0.72);
+  --panel-border: rgba(140, 130, 255, 0.22);
+
+  /* Text */
+  --text: #eef0ff;
+  --text-dim: #a6a8d4;
+  --text-faint: #6d6f9c;
+
+  /* Accents */
+  --accent: #9d7bff;
+  --accent-2: #6be1ff;
+  --gold: #f2c14e;
+  --danger: #ff5d73;
+  --good: #6bffb0;
+
+  /* Element colors */
+  --pyro: #ff6b3d;
+  --hydro: #3db4ff;
+  --cryo: #8fe4ff;
+  --electro: #c77bff;
+  --geo: #f2c14e;
+  --anemo: #7ff7c3;
+  --aether: #ffd6f5;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --glow: 0 0 22px rgba(157, 123, 255, 0.45);
+
+  --font-display: 'Cinzel', 'Georgia', serif;
+  --font-body: 'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(1200px 800px at 15% -10%, #1a1440 0%, transparent 60%),
+    radial-gradient(1000px 700px at 110% 10%, #0f2440 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.boot-splash {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(157, 123, 255, 0.35);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Shared button styles */
+.btn {
+  border: 1px solid var(--panel-border);
+  background: linear-gradient(180deg, rgba(60, 55, 120, 0.6), rgba(30, 28, 66, 0.6));
+  color: var(--text);
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--glow);
+  border-color: var(--accent);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: linear-gradient(180deg, var(--accent), #6a49d6);
+  border-color: transparent;
+}
+.btn-ghost {
+  background: transparent;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--panel-border);
+}
+
+@keyframes float-up {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -60px) scale(1.25);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(157, 123, 255, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(157, 123, 255, 0.7);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
